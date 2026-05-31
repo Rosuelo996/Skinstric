@@ -46,8 +46,10 @@ const TestingPage = () => {
         const data = await response.json();
 
         console.log(data);
+
       } catch (error) {
         setError("Something went wrong. Please try again.");
+
       } finally {
         setIsLoading(false);
         setIsSuccess(true);
@@ -58,7 +60,7 @@ const TestingPage = () => {
   return (
     <main className="testing">
       <section className="testing-page">
-        <p className="testing-label">TO START ANALYSIS</p>
+        <p className="page-label">TO START ANALYSIS</p>
 
         <div className="testing-diamond">
           <img
@@ -132,7 +134,7 @@ const TestingPage = () => {
 
         {isSuccess && (
           <Link href={"/result"}>
-            <button className="testing-proceed" onClick={handleSubmit}>
+            <button className="proceed-button action-button" onClick={handleSubmit}>
               <span>PROCEED</span>
               <img src="/icons/diamond-btn-right.svg" alt="" />
             </button>
@@ -140,7 +142,7 @@ const TestingPage = () => {
         )}
 
         <Link href={"/"}>
-          <button className="testing-back">
+          <button className="back-button action-button">
             <img src="/icons/diamond-btn-left.svg" alt="" />
             <span>BACK</span>
           </button>
