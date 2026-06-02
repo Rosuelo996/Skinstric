@@ -5,7 +5,7 @@ const SelectPage = () => {
     <main className="select">
       <section className="select-page">
         <div className="page-label">
-          <h1 className="page-label__title">A.I ANALYSIS</h1>
+          <p className="page-label__title">A.I ANALYSIS</p>
           <p className="page-label__para">
             A.I HAS ESTIMATED THE FOLLOWING
             <br />
@@ -31,9 +31,11 @@ const SelectPage = () => {
           />
 
           <div className="select-diamond__content">
+            <Link href={"/summary"}>
             <button className="select-diamond__card">
               <span className="select-diamond__label">DEMOGRAPHICS</span>
             </button>
+            </Link>
 
             <button className="select-diamond__card" disabled>
               <span className="select-diamond__label">COSMETIC
@@ -55,17 +57,17 @@ const SelectPage = () => {
           </div>
         </div>
 
-        <Link href={"/summary"}>
+        <Link href={"/result"}>
           <button className="back-button action-button">
-            <img src="/icons/diamond-btn-left.svg" alt="" />
+            <img className="action-button__img" src="/icons/diamond-btn-left.svg" alt="" />
             <span>BACK</span>
           </button>
         </Link>
 
-        <Link href={"/result"}>
+        <Link href={"/summary"}>
             <button className="proceed-button action-button">
               <span>GET SUMMARY</span>
-              <img src="/icons/diamond-btn-right.svg" alt="" />
+              <img className="action-button__img" src="/icons/diamond-btn-right.svg" alt="" />
             </button>
           </Link>
 

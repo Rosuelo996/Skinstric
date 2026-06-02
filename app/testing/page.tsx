@@ -58,7 +58,7 @@ const TestingPage = () => {
     <main className="testing">
       <section className="testing-page">
         <div className="page-label">
-          <h1 className="page-label__title">TO START ANALYSIS</h1>
+          <p className="page-label__title">TO START ANALYSIS</p>
         </div>
 
         <div className="layout-diamond testing-diamond">
@@ -133,14 +133,14 @@ const TestingPage = () => {
           <Link href={"/result"}>
             <button className="proceed-button action-button">
               <span>PROCEED</span>
-              <img src="/icons/diamond-btn-right.svg" alt="" />
+              <img className="action-button__img" src="/icons/diamond-btn-right.svg" alt="" />
             </button>
           </Link>
         )}
 
         <Link href={"/"}>
           <button className="back-button action-button">
-            <img src="/icons/diamond-btn-left.svg" alt="" />
+            <img className="action-button__img" src="/icons/diamond-btn-left.svg" alt="" />
             <span>BACK</span>
           </button>
         </Link>

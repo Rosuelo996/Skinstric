@@ -94,7 +94,7 @@ const ResultPage = () => {
         </div>
 
         <div className="page-label">
-          <h1 className="page-label__title">TO START ANALYSIS</h1>
+          <p className="page-label__title">TO START ANALYSIS</p>
         </div>
 
         <div className="result-options">
