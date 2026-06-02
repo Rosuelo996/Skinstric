@@ -13,7 +13,7 @@ const Header = () => {
           </div>
         </div>
 
-        <button className="header__btn">ENTER CODE</button>
+        <button className="header__button">ENTER CODE</button>
       </header>
   )
 }
