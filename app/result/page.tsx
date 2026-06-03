@@ -54,6 +54,7 @@ const ResultPage = () => {
           );
           const data = await response.json();
           dispatch(setResult(data.data));
+          localStorage.setItem("skinstricAnalysis", JSON.stringify(data.data));
           router.push("/select");
         } catch {
           setError("Upload failed. Please try again.");

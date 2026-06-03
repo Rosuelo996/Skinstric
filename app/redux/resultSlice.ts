@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export type Analysis = {
+  race: Record<string, number>;
+  age: Record<string, number>;
+  gender: Record<string, number>;
+};
+
+type ResultState = {
+  analysis: Analysis | null;
+}
+
+const initialState: ResultState = {
   analysis: null,
 };
 
