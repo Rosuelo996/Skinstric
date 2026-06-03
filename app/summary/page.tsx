@@ -1,12 +1,46 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import formatAnalysisData from "../utils/formatAnalysisData";
+import { Analysis } from "../redux/resultSlice";
 
 const SummaryPage = () => {
   const circleRef = useRef<HTMLDivElement>(null);
-  const score = 96;
+
+  const analysis = useSelector((state: RootState) => state.result.analysis);
+
+  const [savedAnalysis, setSavedAnalysis] = useState<Analysis | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<
+    "race" | "age" | "gender"
+  >("race");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("skinstricAnalysis");
+
+    if (stored) {
+      setSavedAnalysis(JSON.parse(stored));
+    }
+  }, []);
+
+  const currentAnalysis = analysis || savedAnalysis;
+
+  const categoryData = currentAnalysis?.[selectedCategory];
+  const selectedEntries = formatAnalysisData(categoryData);
+  const mainResult = selectedEntries[0];
+  const [mainLabel, mainScore] = mainResult || [];
+  const score = mainScore || 0;
+
+  const raceResults = formatAnalysisData(currentAnalysis?.race);
+  const ageResults = formatAnalysisData(currentAnalysis?.age);
+  const genderResults = formatAnalysisData(currentAnalysis?.gender);
+
+  const [mainRace] = raceResults[0] || [];
+  const [mainAge] = ageResults[0] || [];
+  const [mainGender] = genderResults[0] || [];
 
   useEffect(() => {
     if (!circleRef.current) return;
@@ -33,28 +67,43 @@ const SummaryPage = () => {
 
         <div className="summary-content">
           <div className="summary-sidebar">
-            <button className="summary-card summary-card--active">
-              <p className="summary-card__value">EAST ASIAN</p>
+            <button
+              onClick={() => setSelectedCategory("race")}
+              className={`summary-card ${
+                selectedCategory === "race" ? "summary-card--active" : ""
+              }`}
+            >
+              <p className="summary-card__value">{mainRace}</p>
               <p className="summary-card__label">RACE</p>
             </button>
 
-            <button className="summary-card">
-              <p className="summary-card__value">20-29</p>
+            <button
+              onClick={() => setSelectedCategory("age")}
+              className={`summary-card ${
+                selectedCategory === "age" ? "summary-card--active" : ""
+              }`}
+            >
+              <p className="summary-card__value">{mainAge}</p>
               <p className="summary-card__label">AGE</p>
             </button>
 
-            <button className="summary-card">
-              <p className="summary-card__value">FEMALE</p>
+            <button
+              onClick={() => setSelectedCategory("gender")}
+              className={`summary-card ${
+                selectedCategory === "gender" ? "summary-card--active" : ""
+              }`}
+            >
+              <p className="summary-card__value">{mainGender}</p>
               <p className="summary-card__label">SEX</p>
             </button>
           </div>
 
           <div className="summary-main">
-            <p className="summary-main__title">East asian</p>
+            <p className="summary-main__title">{mainLabel}</p>
 
             <div className="summary-score">
               <div ref={circleRef} className="summary-score__circle">
-                <p className="summary-score__value">96</p>
+                <p className="summary-score__value">{Math.round(score)}</p>
                 <span className="summary-score__symbol">%</span>
               </div>
             </div>
@@ -62,70 +111,28 @@ const SummaryPage = () => {
 
           <div className="summary-confidence">
             <div className="summary-confidence__header">
-              <p className="summary-confidence__heading">RACE</p>
+              <p className="summary-confidence__heading">
+                {selectedCategory === "gender" ? "SEX" : selectedCategory.toUpperCase()}
+                </p>
               <p className="summary-confidence__heading">A.I. CONFIDENCE</p>
             </div>
 
             <div className="summary-confidence__list">
-              <div className="confidence-row confidence-row--active">
-                <div className="confidence-row__content">
-                  <img
-                    src="/icons/diamond-dot-active.svg"
-                    alt=""
-                    className="confidence-row__icon"
-                  />
-                  <p className="confidence-row__label">East Asian</p>
+              {selectedEntries.map(([selectedLabel, selectedScore]) => (
+                <div key={selectedLabel} className="confidence-row">
+                  <div className="confidence-row__content">
+                    <img
+                      src="/icons/diamond-dot.svg"
+                      alt=""
+                      className="confidence-row__icon"
+                    />
+                    <p className="confidence-row__label">{selectedLabel}</p>
+                  </div>
+                  <p className="confidence-row__score">
+                    {Math.round(selectedScore)}%
+                  </p>
                 </div>
-                <p className="confidence-row__score">96%</p>
-              </div>
-
-              <div className="confidence-row">
-                <div className="confidence-row__content">
-                  <img
-                    src="/icons/diamond-dot.svg"
-                    alt=""
-                    className="confidence-row__icon"
-                  />
-                  <p className="confidence-row__label">White</p>
-                </div>
-                <p className="confidence-row__score">6%</p>
-              </div>
-
-              <div className="confidence-row">
-                <div className="confidence-row__content">
-                  <img
-                    src="/icons/diamond-dot.svg"
-                    alt=""
-                    className="confidence-row__icon"
-                  />
-                  <p className="confidence-row__label">Black</p>
-                </div>
-                <p className="confidence-row__score">3%</p>
-              </div>
-
-              <div className="confidence-row">
-                <div className="confidence-row__content">
-                  <img
-                    src="/icons/diamond-dot.svg"
-                    alt=""
-                    className="confidence-row__icon"
-                  />
-                  <p className="confidence-row__label">South Asian</p>
-                </div>
-                <p className="confidence-row__score">2%</p>
-              </div>
-
-              <div className="confidence-row">
-                <div className="confidence-row__content">
-                  <img
-                    src="/icons/diamond-dot.svg"
-                    alt=""
-                    className="confidence-row__icon"
-                  />
-                  <p className="confidence-row__label">Latino Hispanic</p>
-                </div>
-                <p className="confidence-row__score">0%</p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -133,7 +140,11 @@ const SummaryPage = () => {
         <div className="summary-footer">
           <Link href={"/select"}>
             <button className="back-button action-button">
-              <img className="action-button__img" src="/icons/diamond-btn-left.svg" alt="" />
+              <img
+                className="action-button__img"
+                src="/icons/diamond-btn-left.svg"
+                alt=""
+              />
               <span>BACK</span>
             </button>
           </Link>
@@ -145,9 +156,7 @@ const SummaryPage = () => {
           <div className="summary-footer__actions">
             <button className="summary-footer__button">RESET</button>
 
-            <button className="summary-footer__button">
-              CONFIRM
-            </button>
+            <button className="summary-footer__button">CONFIRM</button>
           </div>
         </div>
       </section>
