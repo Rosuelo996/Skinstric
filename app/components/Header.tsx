@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
@@ -15,7 +16,9 @@ const Header = () => {
   return (
     <header className={`header ${isTransparent ? "header--transparent" : ""}`}>
       <div className="header__left">
-        <div className="header__logo">SKINSTRIC</div>
+        <Link href="/" className="header__logo">
+          SKINSTRIC
+        </Link>
 
         <div
           className={`header__step ${isTransparent ? "header__step--light" : ""}`}
