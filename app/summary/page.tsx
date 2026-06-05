@@ -18,6 +18,12 @@ const SummaryPage = () => {
     "race" | "age" | "gender"
   >("race");
 
+   const [actualValues, setActualValues] = useState({
+    race: "",
+    age: "",
+    gender: "",
+  });
+
   useEffect(() => {
     const stored = localStorage.getItem("skinstricAnalysis");
 
@@ -30,7 +36,13 @@ const SummaryPage = () => {
 
   const categoryData = currentAnalysis?.[selectedCategory];
   const selectedEntries = formatAnalysisData(categoryData);
-  const mainResult = selectedEntries[0];
+
+  const selectedValue = actualValues[selectedCategory];
+  
+  const mainResult =
+  selectedEntries.find(([label]) => label === selectedValue) ||
+  selectedEntries[0];
+
   const [mainLabel, mainScore] = mainResult || [];
   const score = mainScore || 0;
 
@@ -41,6 +53,16 @@ const SummaryPage = () => {
   const [mainRace] = raceResults[0] || [];
   const [mainAge] = ageResults[0] || [];
   const [mainGender] = genderResults[0] || [];
+
+  const handleReset = () => {
+  setActualValues({
+    race: "",
+    age: "",
+    gender: "",
+  });
+};
+
+ 
 
   useEffect(() => {
     if (!circleRef.current) return;
@@ -73,7 +95,7 @@ const SummaryPage = () => {
                 selectedCategory === "race" ? "summary-card--active" : ""
               }`}
             >
-              <p className="summary-card__value">{mainRace}</p>
+              <p className="summary-card__value">{actualValues.race || mainRace}</p>
               <p className="summary-card__label">RACE</p>
             </button>
 
@@ -83,7 +105,7 @@ const SummaryPage = () => {
                 selectedCategory === "age" ? "summary-card--active" : ""
               }`}
             >
-              <p className="summary-card__value">{mainAge}</p>
+              <p className="summary-card__value">{actualValues.age || mainAge}</p>
               <p className="summary-card__label">AGE</p>
             </button>
 
@@ -93,7 +115,7 @@ const SummaryPage = () => {
                 selectedCategory === "gender" ? "summary-card--active" : ""
               }`}
             >
-              <p className="summary-card__value">{mainGender}</p>
+              <p className="summary-card__value">{actualValues.gender || mainGender}</p>
               <p className="summary-card__label">SEX</p>
             </button>
           </div>
@@ -112,17 +134,30 @@ const SummaryPage = () => {
           <div className="summary-confidence">
             <div className="summary-confidence__header">
               <p className="summary-confidence__heading">
-                {selectedCategory === "gender" ? "SEX" : selectedCategory.toUpperCase()}
-                </p>
+                {selectedCategory === "gender"
+                  ? "SEX"
+                  : selectedCategory.toUpperCase()}
+              </p>
               <p className="summary-confidence__heading">A.I. CONFIDENCE</p>
             </div>
 
             <div className="summary-confidence__list">
               {selectedEntries.map(([selectedLabel, selectedScore]) => (
-                <div key={selectedLabel} className="confidence-row">
+                <button
+                  key={selectedLabel}
+                  className={`confidence-row ${actualValues[selectedCategory] === selectedLabel ? "confidence-row--active" : ""}`}
+                  onClick={() => {
+                    setActualValues((prev) => (
+                      {
+                        ...prev,
+                        [selectedCategory] : selectedLabel
+                      }
+                    ))
+                  }}
+                >
                   <div className="confidence-row__content">
                     <img
-                      src="/icons/diamond-dot.svg"
+                      src={`${actualValues[selectedCategory] === selectedLabel ? "/icons/diamond-dot-active.svg" : "/icons/diamond-dot.svg"}`}
                       alt=""
                       className="confidence-row__icon"
                     />
@@ -131,7 +166,7 @@ const SummaryPage = () => {
                   <p className="confidence-row__score">
                     {Math.round(selectedScore)}%
                   </p>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -154,9 +189,10 @@ const SummaryPage = () => {
           </p>
 
           <div className="summary-footer__actions">
-            <button className="summary-footer__button">RESET</button>
+            <button className="summary-footer__button" onClick={handleReset}
+            >RESET</button>
 
-            <button className="summary-footer__button">CONFIRM</button>
+            <button className="summary-footer__button not-allowed" disabled>CONFIRM</button>
           </div>
         </div>
       </section>

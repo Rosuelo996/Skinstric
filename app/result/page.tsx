@@ -10,6 +10,8 @@ const ResultPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showCameraRequest, setShowCameraRequest] = useState(false);
+
   const [previewImage, setPreviewImage] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -137,8 +139,41 @@ const ResultPage = () => {
                     src="/icons/camera.svg"
                     alt=""
                     className="result-option__icon"
+                    onClick={() => {
+                      setShowCameraRequest(true);
+                    }}
                   />
                 </div>
+
+                {showCameraRequest && (
+                  <div className="camera-request">
+                    <div className="camera-request__content">
+                      <p className="camera-request__content--para">
+                        ALLOW A.I. TO ACCESS YOUR CAMERA
+                      </p>
+                    </div>
+
+                    <div className="camera-request__divider"></div>
+
+                    <div className="camera-request__actions">
+                      <button
+                        className="camera-request__actions--button"
+                        onClick={() => {
+                          setShowCameraRequest(false);
+                        }}
+                      >
+                        DENY
+                      </button>
+
+                      <Link href="/camera">
+                        <button className="camera-request__actions--button">
+                          ALLOW
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+
                 <img
                   src="/icons/line.svg"
                   alt=""
