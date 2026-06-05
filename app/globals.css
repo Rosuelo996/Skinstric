@@ -2003,12 +2003,6 @@ SECTION
   }
 }
 
-@media (max-width: 768px) {
-  .page-label__section-title {
-    font-size: 48px;
-  }
-}
-
 @media (max-width: 900px) {
   .summary-page {
     overflow-y: auto;
@@ -2055,4 +2049,13 @@ SECTION
     width: 36px;
     height: 36px;
   }
+}
+
+@media (max-width: 768px) {
+  .page-label__section-title {
+    font-size: 48px;
+  }
+  .summary-footer__text {
+    display: none
+}
 }
