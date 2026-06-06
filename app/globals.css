@@ -2058,4 +2058,7 @@ SECTION
   .summary-footer__text {
     display: none
 }
+.summary-main__title {
+  display: none
+}
 }
