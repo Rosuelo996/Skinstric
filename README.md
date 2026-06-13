@@ -6,7 +6,6 @@ Frontend internship project built with Next.js, TypeScript and Redux Toolkit.
 
 Skinstric is an interactive web application that allows users to upload or capture an image and receive dynamically rendered skin analysis results through API integration.
 
----
 
 ## Features
 
@@ -17,7 +16,6 @@ Skinstric is an interactive web application that allows users to upload or captu
 * Loading and transition states
 * Multi-page application flow
 
----
 
 ## Tech Stack
 
@@ -37,7 +35,6 @@ Deployment
 * Vercel
 * GitHub
 
----
 
 ## What I Worked On
 
@@ -49,7 +46,6 @@ During this project I focused on:
 * Improving application flow and user experience
 * Deploying and testing production builds
 
----
 
 ## Run Locally
 
@@ -57,7 +53,6 @@ npm install
 
 npm run dev
 
----
 
 ## Next Improvements
 
