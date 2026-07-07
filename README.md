@@ -1,4 +1,4 @@
-# Skinstric — AI Skin Analysis Experience
+# Skinstric - AI Skin Analysis Experience
 
 Interactive AI skin analysis application built with **Next.js**, **TypeScript**, and **Redux Toolkit**.
 
@@ -7,10 +7,6 @@ Interactive AI skin analysis application built with **Next.js**, **TypeScript**,
 ## Overview
 
 Skinstric is a responsive web application where users can upload or capture a photo and receive AI-generated skin analysis results. Built during a frontend internship, the project focuses on creating a seamless experience from image upload through to displaying the final analysis.
-
-## Preview
-
-*Add screenshots or a short GIF here.*
 
 ## Features
 
@@ -52,6 +48,12 @@ Vercel
 
 GitHub
 
+## Requirements
+
+Node.js 16 or later
+
+npm
+
 ## Installation
 
 Clone the repository.
@@ -78,14 +80,4 @@ Start the development server.
 npm run dev
 ```
 
-Open **http://localhost:3000** in your browser.
-
-## Future Improvements
-
-Improve the loading experience
-
-Refine the camera capture flow
-
-Expand the analysis visualisation
-
-Improve error handling and user feedback
+Open **http://localhost:3000** in your browser
