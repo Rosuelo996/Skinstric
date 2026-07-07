@@ -1,61 +1,91 @@
 # Skinstric — AI Skin Analysis Experience
 
-Live Demo: https://skinstric-amber.vercel.app
+Interactive AI skin analysis application built with **Next.js**, **TypeScript**, and **Redux Toolkit**.
 
-Frontend internship project built with Next.js, TypeScript and Redux Toolkit.
+**Live Demo:** https://skinstric-amber.vercel.app
 
-Skinstric is an interactive web application that allows users to upload or capture an image and receive dynamically rendered skin analysis results through API integration.
+## Overview
 
+Skinstric is a responsive web application where users can upload or capture a photo and receive AI-generated skin analysis results. Built during a frontend internship, the project focuses on creating a seamless experience from image upload through to displaying the final analysis.
+
+## Preview
+
+*Add screenshots or a short GIF here.*
 
 ## Features
 
-* Image upload and camera capture flow
-* Dynamic analysis result rendering
-* Global state management with Redux Toolkit
-* Responsive layouts across desktop and mobile
-* Loading and transition states
-* Multi-page application flow
+Camera capture using the browser
 
+Image upload
 
-## Tech Stack
+AI-generated skin analysis
 
-Frontend
+Dynamic result rendering
 
-* Next.js
-* React
-* TypeScript
-* CSS
+Redux Toolkit state management
 
-State Management
+Responsive design for desktop and mobile
 
-* Redux Toolkit
+Loading and transition states
 
-Deployment
+Multi-step application flow
 
-* Vercel
-* GitHub
+## Technologies
 
+**Frontend**
 
-## What I Worked On
+Next.js
 
-During this project I focused on:
+React
 
-* Building responsive interfaces from design specifications
-* Integrating API responses into the UI
-* Managing state across multiple pages
-* Improving application flow and user experience
-* Deploying and testing production builds
+TypeScript
 
+CSS
 
-## Run Locally
+**State Management**
 
+Redux Toolkit
+
+**Deployment**
+
+Vercel
+
+GitHub
+
+## Installation
+
+Clone the repository.
+
+```bash
+git clone https://github.com/yourusername/skinstric.git
+```
+
+Move into the project folder.
+
+```bash
+cd skinstric
+```
+
+Install dependencies.
+
+```bash
 npm install
+```
 
+Start the development server.
+
+```bash
 npm run dev
+```
 
+Open **http://localhost:3000** in your browser.
 
-## Next Improvements
+## Future Improvements
 
-* Improve loading experience
-* Refine camera interaction flow
-* Expand result visualisation
+Improve the loading experience
+
+Refine the camera capture flow
+
+Expand the analysis visualisation
+
+Improve error handling and user feedback
